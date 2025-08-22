@@ -1,4 +1,7 @@
 package com.merveaydin.weatherhomeworkcompose.model
 
-class WeatherModel {
-}
+data class WeatherModel(
+    val location: Location,
+    val current: Current,
+    val forecast: Forecast
+)
