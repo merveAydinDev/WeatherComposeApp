@@ -1,7 +1,7 @@
 package com.merveaydin.weatherhomeworkcompose.model
 
 data class WeatherModel(
-    val location: Location,
+    val location: WeatherLocation,
     val current: Current,
     val forecast: Forecast
 )
@@ -23,9 +23,10 @@ data class Day(
     val mintemp_c: Double,
     val condition: Condition
 )
-data class Location(
+data class WeatherLocation(
     val name: String,
-    val localtime: String
+    val localtime: String,
+    val country: String
 )
 
 data class Current(
@@ -38,4 +39,9 @@ data class Current(
 data class Condition(
     val text: String,
     val icon: String
+)
+data class SearchLocation(
+    val name: String,
+    val country: String,
+    val url: String
 )
