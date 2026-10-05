@@ -24,7 +24,7 @@ Ana Arayüz ve Konum Bazlı Hava Durumu
 
 Şehir Arama Ekranı
 
-![sehir_arama](screenshots/search_screen1.png)
+![sehir_arama](screenshots/search_screen.png)
 ![sehir_arama1](screenshots/search_screen1.png)
 
 Arama Geçmişi
