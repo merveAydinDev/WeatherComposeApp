@@ -8,6 +8,7 @@ Uygulama, Declarative UI mimarisi, Retrofit tabanlı REST API entegrasyonu, Fuse
 **🌟 Öne Çıkan Özellikler**
 
 **Konum Tabanlı Otomatik Hava Durumu:** Cihazın mevcut koordinatlarını (GPS) kullanarak kullanıcının bulunduğu konumun hava durumu verilerini anında getirir.
+
 **Detaylı Şehir Arama:** Dünyanın her yerinden şehir arama ve aranan şehrin anlık hava verilerini sorgulama.
 
 **Kapsamlı Hava Durumu Detayları:** Sıcaklık, hissedilen sıcaklık, rüzgar hızı, nem oranı ve dinamik durum açıklamaları.
@@ -18,6 +19,7 @@ Uygulama, Declarative UI mimarisi, Retrofit tabanlı REST API entegrasyonu, Fuse
 
 ---
 **📱 Ekran Görüntüleri**
+
 **Ana Arayüz ve Konum Bazlı Hava Durumu**
 
 ![ana_ekran](screenshots/main_screen.png)
@@ -56,7 +58,7 @@ Projeyi bilgisayarınızda veya cihazınızda çalıştırmak için aşağıdaki
 Android Studio: Ladybug veya üzeri güncel bir sürüm
 JDK Version: Java 17+
 Minimum Android SDK: API Level 24 (Android 7.0) veya üzeri
-2. Repoyu Klonlayın
+3. Repoyu Klonlayın
 ```bash
 git clone https://github.com/merveAydinDev/WeatherComposeApp.git
 cd WeatherComposeApp
