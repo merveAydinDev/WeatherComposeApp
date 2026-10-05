@@ -19,11 +19,16 @@ Modern ve Dinamik Arayüz: Jetpack Compose (Material 3) bileşenleriyle tasarlan
 ---
 📱 Ekran Görüntüleri
 Ana Arayüz ve Konum Bazlı Hava Durumu
+
 ![ana_ekran](screenshots/main_screen.png)
+
 Şehir Arama Ekranı
+
 ![sehir_arama](screenshots/search_screen1.png)
 ![sehir_arama1](screenshots/search_screen1.png)
+
 Arama Geçmişi
+
 ![arama_gecmisi](screenshots/search_backup.png)
 ![arama_gecmisi1](screenshots/search_backup1.png)
 
