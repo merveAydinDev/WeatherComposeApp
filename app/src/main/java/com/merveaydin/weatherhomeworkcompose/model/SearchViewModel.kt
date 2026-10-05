@@ -53,15 +53,18 @@ class SearchViewModel: ViewModel() {
     fun fetchWeather(city: String){
         viewModelScope.launch {
             isLoading = true
+            Log.e("API_CHECK", "FETCH WEATHER ÇALIŞTI - şehir: $city")
             try {
                 val data = RetrofitInstance.api.getForecastWeather(
                     apiKey = "bee74818ccf445498b9132557251508",
                     city = city,
                     days = 10
                 )
+
+                Log.d("API_CHECK", "Gelen gün sayısı: ${data.forecast.forecastday.size}")
                 _weatherData.value = data
-                Log.d("API_CHECK", "Weather data fetched: $data")
-            } catch (e: Exception){
+            }
+            catch (e: Exception){
                 e.printStackTrace()
                 Log.e("API_CHECK", "Weather fetch failed: ${e.message}")
             } finally {

@@ -1,7 +1,5 @@
 package com.merveaydin.weatherhomeworkcompose.service
 
-
-import com.merveaydin.weatherhomeworkcompose.model.SearchLocation
 import com.merveaydin.weatherhomeworkcompose.model.WeatherModel
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,12 +13,5 @@ interface WeatherAPI {
         @Query("days") days: Int
     ): WeatherModel
 
-}
-interface LocationApi {
-    @GET("search.json")
-    suspend fun getLocationApi(
-        @Query("key") apiKey: String,
-        @Query("q") city: String
-    ): List<SearchLocation>
 }
 

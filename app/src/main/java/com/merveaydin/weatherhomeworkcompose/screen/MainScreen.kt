@@ -1,16 +1,12 @@
 package com.merveaydin.weatherhomeworkcompose.screen
 
-import android.net.Uri
 import android.os.Build
-import android.view.ViewGroup
-import android.widget.FrameLayout
-import androidx.annotation.OptIn
 import androidx.annotation.RequiresApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -18,8 +14,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -39,31 +33,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.viewinterop.AndroidView
-import androidx.media3.common.MediaItem
-import androidx.media3.common.Player
-import androidx.media3.common.util.UnstableApi
-import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.ui.PlayerView
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.merveaydin.weatherhomeworkcompose.R
+import com.merveaydin.weatherhomeworkcompose.model.Condition
 import com.merveaydin.weatherhomeworkcompose.model.Forecastday
 import com.merveaydin.weatherhomeworkcompose.model.Hour
 import com.merveaydin.weatherhomeworkcompose.model.SearchViewModel
-import com.merveaydin.weatherhomeworkcompose.model.WeatherModel
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
 import java.util.Locale
 
 
@@ -122,6 +110,15 @@ fun MainScreen(cityName: String, navController: NavController, viewModel: Search
                         fontWeight = FontWeight.Bold,
                         color = Color.White,
                     )
+                    Column(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        WeatherIcon(
+                            code = weather.current.condition.code,
+                            conditionText = weather.current.condition.text
+                        )
+                    }
                     Text(text = weather.current.condition.text,
                         style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier.fillMaxWidth().padding(2.dp),
@@ -137,7 +134,7 @@ fun MainScreen(cityName: String, navController: NavController, viewModel: Search
                         color = Color.White
                     ) }
                 Spacer(modifier = Modifier.height(16.dp))
-                //Sa8atlik
+                //Saatlik
                 Card(
                     modifier = Modifier.padding(10.dp).fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
@@ -162,9 +159,9 @@ fun MainScreen(cityName: String, navController: NavController, viewModel: Search
                 LazyColumn(
                     verticalArrangement = Arrangement.spacedBy(4.dp),
                     modifier = Modifier
-                        .fillMaxSize()
-                        .background(Color.Transparent)
-                        .weight(1f),
+                        .fillMaxWidth()
+                        .weight(1f)
+                        .background(Color.Transparent),
                 ) {
                     items(weather.forecast.forecastday){
                         ItemRow2(forecastday = it, navController = navController)
@@ -221,7 +218,7 @@ fun ItemRow2(forecastday: Forecastday, navController: NavController){
     val dayText = if (date == today){
         "Today"
     }else{
-        date.dayOfWeek.getDisplayName(java.time.format.TextStyle.FULL, Locale.ENGLISH)
+        date.dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH)
     }
     Card(
         shape = RoundedCornerShape(12.dp),
@@ -280,5 +277,35 @@ fun ItemRow2(forecastday: Forecastday, navController: NavController){
             }
         }
     }
+}
+
+fun getWeatherCategory(code: Int, dayCondition: String): Int {
+    return when (code) {
+        1000 -> R.drawable.sunny                  // Sunny / Clear
+        1003, 1006, 1009 -> R.drawable.cloudy     // Partly cloudy, Cloudy, Overcast
+        1030, 1135, 1147 -> R.drawable.cloudy     // Mist, Fog, Freezing fog → bulutlu kategori
+        1063, 1150, 1153, 1168, 1171, 1180, 1183,
+        1186, 1189, 1192, 1195, 1240, 1243, 1246 -> R.drawable.raining
+        1066, 1210, 1213, 1216, 1219, 1222, 1225,
+        1255, 1258, 1279, 1282 -> R.drawable.snowy
+        1069, 1204, 1207, 1249, 1252, 1261, 1264 -> R.drawable.snowy  // veya sleet → snowing kategori
+        1087, 1273, 1276 -> R.drawable.thunder
+        1279, 1282 -> R.drawable.thunder          // Snow + thunder
+        else -> R.drawable.cloudy                 // Diğer tüm durumlar → bulutlu
+    }
+}
+
+
+@Composable
+fun WeatherIcon(code: Int, conditionText: String){
+    val iconRes = getWeatherCategory(code, conditionText)
+    Image(
+        painter = painterResource(id = iconRes),
+        contentDescription = conditionText,
+        modifier = Modifier.size(150.dp)
+            .fillMaxWidth()
+            .padding(1.dp),
+        alignment = Alignment.Center
+    )
 }
 

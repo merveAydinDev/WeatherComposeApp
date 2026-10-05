@@ -45,7 +45,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import androidx.room.util.query
 import coil.compose.AsyncImage
 import com.merveaydin.weatherhomeworkcompose.RetrofitInstance
 import com.merveaydin.weatherhomeworkcompose.model.SearchViewModel
@@ -85,12 +84,19 @@ fun SearchScreen(
     Box(
         modifier
             .fillMaxSize()
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(Color(0xFFB2E9FF), Color(0xFF0596C5))
+                )
+            )
             .semantics{ isTraversalGroup = true }
     ) {
-        Column {
+        Column(
+            modifier = Modifier.fillMaxSize()
+        ) {
             SearchBar(
                 modifier = Modifier
-                    .align(Alignment.CenterHorizontally)
+                    .fillMaxWidth()
                     .semantics{ traversalIndex = 0f},
                 query = query,
                 onQueryChange = { newText ->
