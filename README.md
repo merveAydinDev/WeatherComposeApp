@@ -112,5 +112,7 @@ WeatherComposeApp/
 ```
 ---
 ✉️ İletişim
+
 Merve Aydın
+
 GitHub: @merveAydinDev
